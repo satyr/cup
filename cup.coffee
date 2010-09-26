@@ -1,3 +1,5 @@
+CoffeeScript.TREE = 'bc87d9ed3d02221a44e6f50814d07b8d2a5806fc'
+
 self.print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
@@ -31,7 +33,7 @@ kick = ->
     when 'T'
       r = ("[#{t} #{v}]" for [t, v] in r).join(' ').replace /\n/g, '\\n'
     when 'N'
-      r = "#{r}".replace /^\s+/, ''
+      r = r.expressions.join('').slice 1
   puts r
 
 for key of CoffeeScript when key not in ['VERSION', 'run', 'load']
