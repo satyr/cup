@@ -1,17 +1,21 @@
-$ = (id) -> document.getElementById id
-silence = Date()
-
 self.print = (msg, tag) ->
   return if msg is silence
-  lmn = document.createElement tag || 'span'
-  lmn.appendChild document.createTextNode msg + '\n'
-  pout.insertBefore lmn, pout.firstChild
+  if print.last is print.last = msg
+    ctrl.setAttribute 'data-x', -~ctrl.getAttribute 'data-x'
+  else
+    ctrl.setAttribute 'data-x', 1
+    lmn = document.createElement tag || 'span'
+    lmn.appendChild document.createTextNode msg + '\n'
+    pout.insertBefore lmn, pout.firstChild
   silence
+print.last = silence = Date()
+
 self.clear = -> pout.innerHTML = ''
 self.say = self.puts = (xs...) -> print xs.join '\n'
 self.warn = (er) -> print er, 'em'
 self.p = (xs...) -> say (JSON.stringify x, null, 2 for x in xs).join '\n'
 
+$ = (id) -> document.getElementById id
 code = $ 'code'
 ctrl = $ 'ctrl'
 pout = $ 'pout'

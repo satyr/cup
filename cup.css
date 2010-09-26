@@ -1,0 +1,9 @@
+#ctrl {display: inline-block}
+#ctrl[data-x='1']::after {display: none}
+#ctrl::after {
+  content: 'x' attr(data-x);
+  font: bold 88% monospace;
+  vertical-align: bottom;
+  margin-left: 1em;
+}
+#pout > *:first-child {font-weight: bold}
