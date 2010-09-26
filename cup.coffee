@@ -1,5 +1,3 @@
-CoffeeScript.TREE = 'bc87d9ed3d02221a44e6f50814d07b8d2a5806fc'
-
 self.print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
@@ -46,7 +44,7 @@ for key of CoffeeScript when key not in ['VERSION', 'run', 'load']
   btns[key] = btns[k] = ctrl.appendChild btn
 
 for k, b of {C: eva1 = btns.eval, S: cmpl = btns.compile}
-  b.innerHTML += " <small><kbd>\\#{k}-RET</kbd></small>"
+  b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
   return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
   return unless b = (ev.ctrlKey && eva1) || (ev.shiftKey && cmpl)
@@ -58,3 +56,5 @@ setTimeout ->
     {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/.test cf
     code.value = cf
   (if op then btns[op.toLowerCase()] else eva1).click()
+
+CoffeeScript.TREE = 'bc87d9ed3d02221a44e6f50814d07b8d2a5806fc'
