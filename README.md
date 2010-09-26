@@ -1,1 +1,1 @@
-#[cup](http://satyr.github.com/cup/)
+[_gh-pages_](http://github.com/satyr/cup/tree/gh-pages) is the new _master_.
