@@ -13,7 +13,7 @@ print.last = silence = Date()
 self.clear = -> pout.innerHTML = ''
 self.say = self.puts = (xs...) -> print xs.join '\n'
 self.warn = (er) -> print er, 'em'
-self.p = (xs...) -> say (JSON.stringify x, null, 2 for x in xs).join '\n'
+self.p = (xs...) -> say (JSON.stringify x, null, 1 for x in xs).join '\n'
 
 $ = (id) -> document.getElementById id
 code = $ 'code'
