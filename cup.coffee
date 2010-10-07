@@ -57,4 +57,5 @@ setTimeout ->
     code.value = cf
   (if op then btns[op.toLowerCase()] else eva1).click()
 
-CoffeeScript.TREE = 'b5261abb6b05310b7797633bc5fcf7239c893c7e'
+CoffeeScript.VERSION += '+'
+CoffeeScript.TREE = 'f90f1ef8e0fc9a720520e3747bf8beb3c42b2edf'
