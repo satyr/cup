@@ -13,7 +13,7 @@ print.last = silence = Date()
 self.clear = -> pout.innerHTML = ''
 self.say = self.puts = (xs...) -> print xs.join '\n'
 self.warn = (er) -> print er, 'em'
-self.p = (xs...) -> say (JSON.stringify x, null, 1 for x in xs).join '\n'
+self.p = -> say (JSON.stringify x, null, 1 for x in arguments).join '\n'
 
 $ = (id) -> document.getElementById id
 code = $ 'code'
@@ -25,7 +25,7 @@ kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = CoffeeScript[@id] value, noWrap: on
+  try r = CoffeeScript[@id] value, wrap: off
   catch e then warn e; throw e
   switch @accessKey
     when 'T'
@@ -34,13 +34,13 @@ kick = ->
       r = r.expressions.join('').slice 1
   puts r
 
-for key of CoffeeScript when key not in ['VERSION', 'run', 'load']
+for key of CoffeeScript when key not in ['VERSION', 'run', 'load', 'helpers']
   btn = document.createElement 'button'
   btn.id = key
   btn.onclick = kick
   k = key.charAt()
   K = btn.accessKey = k.toUpperCase()
-  btn.innerHTML = K + key[1..]
+  btn.innerHTML = K + key.slice 1
   btns[key] = btns[k] = ctrl.appendChild btn
 
 for k, b of {C: eva1 = btns.eval, S: cmpl = btns.compile}
@@ -51,11 +51,11 @@ document.onkeydown = (ev) ->
   b.click()
   off
 setTimeout ->
-  if cf = location.hash[1..]
-    try cf = decodeURIComponent cf catch _
+  if cf = location.hash.slice 1
+    try cf = decodeURIComponent cf
     {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/.test cf
     code.value = cf
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 CoffeeScript.VERSION += '+'
-CoffeeScript.TREE = '250ec1264613a6c6528e9bcd5f20667ef9d1cd55'
+CoffeeScript.TREE = 'e5fe145f800c8fcfd0d715584dbf6de940140dee'
