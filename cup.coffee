@@ -1,3 +1,4 @@
+self.CS = CoffeeScript
 self.print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
@@ -25,23 +26,21 @@ kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = CoffeeScript[@id] value, wrap: off
+  try r = CS[@id] value, wrap: no
   catch e then warn e; throw e
   switch @accessKey
-    when 'T'
+    when 't'
       r = ("[#{t} #{v}]" for [t, v] in r).join(' ').replace /\n/g, '\\n'
-    when 'N'
+    when 'n'
       r = r.expressions.join('').slice 1
   puts r
 
-for key of CoffeeScript when key not in ['VERSION', 'run', 'load', 'helpers']
+for Key in ['Tokens', 'Nodes', 'Compile', 'Eval']
   btn = document.createElement 'button'
-  btn.id = key
+  btn.id = key = Key.toLowerCase()
   btn.onclick = kick
-  k = key.charAt()
-  K = btn.accessKey = k.toUpperCase()
-  btn.innerHTML = K + key.slice 1
-  btns[key] = btns[k] = ctrl.appendChild btn
+  btn.innerHTML = Key
+  btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
 for k, b of {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
@@ -57,5 +56,5 @@ setTimeout ->
     code.value = cf
   (if op then btns[op.toLowerCase()] else eva1).click()
 
-CoffeeScript.VERSION += '+'
-CoffeeScript.TREE = 'e5fe145f800c8fcfd0d715584dbf6de940140dee'
+CS.VERSION += '+'
+CS.TREE = 'c0ec479e60b966e6bc5b631649785d2d6b8804f3'
