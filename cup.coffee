@@ -13,7 +13,7 @@ print.last = silence = Date()
 
 self.clear = -> pout.innerHTML = ''
 self.say = self.puts = (xs...) -> print xs.join '\n'
-self.warn = (er) -> print er, 'em'
+self.warn = (er) -> print "#{er}", 'em'
 self.p = -> say (JSON.stringify x, null, 1 for x in arguments).join '\n'
 
 $ = (id) -> document.getElementById id
@@ -21,12 +21,20 @@ code = $ 'code'
 ctrl = $ 'ctrl'
 pout = $ 'pout'
 btns = {}
-poem = code.value
+poem = '''
+"#{CoffeeScript.VERSION} (#{CoffeeScript.TREE})"
+
+
+
+###
+Not to abandon the evil parts
+But to embrace the good parts
+'''
 kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = CS[@id] value, wrap: no
+  try r = CS[@id] value, bare: on
   catch e then warn e; throw e
   switch @accessKey
     when 't'
@@ -54,7 +62,9 @@ setTimeout ->
     try cf = decodeURIComponent cf
     {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/.test cf
     code.value = cf
+  else
+    code.value = poem
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 CS.VERSION += '+'
-CS.TREE = 'c0ec479e60b966e6bc5b631649785d2d6b8804f3'
+CS.TREE = '88cc1ee35d6736bc00de97bcad87612d025a6719'
