@@ -10,8 +10,8 @@
 
 #ribbon {
   position: fixed; bottom: 0; right: 0; border: 0;
-  transform        : rotate(90deg);
-  -o-transform     : rotate(90deg);
-  -moz-transform   : rotate(90deg);
+          transform: rotate(90deg);
+       -o-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
 }
