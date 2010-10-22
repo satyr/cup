@@ -58,13 +58,13 @@ document.onkeydown = (ev) ->
   b.click()
   off
 setTimeout ->
-  if cf = location.hash.slice 1
+  code.value = if cf = location.hash.slice 1
     try cf = decodeURIComponent cf
     {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/.test cf
-    code.value = cf
+    cf
   else
-    code.value = poem
+    poem
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 CS.VERSION += '+'
-CS.TREE = 'c11ca948703df02c6ad02eb570639876d9804e26'
+CS.TREE = 'c92fd79f3517d8bc33097bb48a855b8b211b75d2'
