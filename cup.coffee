@@ -67,4 +67,4 @@ setTimeout ->
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 CS.VERSION += '+'
-CS.TREE = 'e007f69c71c137932499b52f6141b5e82cef0a38'
+CS.TREE = '7bfb2e3a7815a1969e9fd8cf43b74b23a9971a0f'
