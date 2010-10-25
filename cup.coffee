@@ -37,10 +37,10 @@ kick = ->
   try r = CS[@id] value, bare: on
   catch e then warn e; throw e
   switch @accessKey
-    when 't'
-      r = ("[#{t} #{v}]" for [t, v] in r).join(' ').replace /\n/g, '\\n'
-    when 'n'
-      r = r.expressions.join('').slice 1
+   when 't'
+    r = (token[0] for token in r).join(' ').replace /\n/g, '\\n'
+   when 'n'
+    r = r.expressions.join('').slice 1
   puts r
 
 for Key in ['Tokens', 'Nodes', 'Compile', 'Eval']
@@ -67,4 +67,4 @@ setTimeout ->
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 CS.VERSION += '+'
-CS.TREE = '7bfb2e3a7815a1969e9fd8cf43b74b23a9971a0f'
+CS.TREE = '0d6d221568b7568cd21707b66eeac40f78f01f3d'
