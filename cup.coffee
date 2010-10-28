@@ -66,5 +66,7 @@ setTimeout ->
     poem
   (if op then btns[op.toLowerCase()] else eva1).click()
 
+self.onfocus = -> code.focus()
+
 CS.VERSION += '+'
-CS.TREE = '0d6d221568b7568cd21707b66eeac40f78f01f3d'
+CS.TREE = '6d8126e498917db07929faedf3737555df2412f1'
