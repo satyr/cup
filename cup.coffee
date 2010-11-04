@@ -1,4 +1,4 @@
-self.CS = CoffeeScript
+self.Coco = Coco
 self.print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
@@ -22,7 +22,8 @@ ctrl = $ 'ctrl'
 pout = $ 'pout'
 btns = {}
 poem = '''
-"#{CoffeeScript.VERSION} (#{CoffeeScript.TREE})"
+"Coco v#{Coco.VERSION} #{Coco.TREE}"
+
 
 
 
@@ -34,12 +35,12 @@ kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = CS[@id] value, bare: on
+  try r = Coco[@id] value, bare: true
   catch e then warn e; throw e
   switch @accessKey
-   when 't'
+  case 't'
     r = (token[0] for token in r).join(' ').replace /\n/g, '\\n'
-   when 'n'
+  case 'n'
     r = r.expressions.join('').slice 1
   puts r
 
@@ -56,7 +57,7 @@ document.onkeydown = (ev) ->
   return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
   return unless b = (ev.ctrlKey && eva1) || (ev.shiftKey && cmpl)
   b.click()
-  off
+  false
 setTimeout ->
   code.value = if cf = location.hash.slice 1
     try cf = decodeURIComponent cf
@@ -68,5 +69,4 @@ setTimeout ->
 
 self.onfocus = -> code.focus()
 
-CS.VERSION += '+'
-CS.TREE = 'c418bca461628f5c1ae755e63ff7a8350087e695'
+Coco.TREE = 'b23dd50c64e6e1f1081454224e25d372e3053e60'
