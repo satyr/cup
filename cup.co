@@ -14,7 +14,7 @@ print.last = silence = Date()
 self.clear = -> pout.innerHTML = ''
 self.say = self.puts = (xs...) -> print xs.join '\n'
 self.warn = (er) -> print "#{er}", 'em'
-self.p = -> say (JSON.stringify x, null, 1 for x in arguments).join '\n'
+self.p = -> say (JSON.stringify x, null, 1 for x of arguments).join '\n'
 
 $ = (id) -> document.getElementById id
 code = $ 'code'
@@ -22,7 +22,7 @@ ctrl = $ 'ctrl'
 pout = $ 'pout'
 btns = {}
 poem = '''
-"Coco v#{Coco.VERSION} #{Coco.TREE}"
+"Coco v#{Coco.VERSION} #{Coco.COMMIT}"
 
 
 
@@ -39,19 +39,19 @@ kick = ->
   catch e then warn e; throw e
   switch @accessKey
   case 't'
-    r = (token[0] for token in r).join(' ').replace /\n/g, '\\n'
+    r = (token[0] for token of r).join(' ').replace /\n/g, '\\n'
   case 'n'
     r = r.expressions.join('').slice 1
   puts r
 
-for Key in ['Tokens', 'Nodes', 'Compile', 'Eval']
+for Key of <[ Tokens Nodes Compile Eval ]>
   btn = document.createElement 'button'
   btn.id = key = Key.toLowerCase()
   btn.onclick = kick
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
-for k, b of {C: eva1 = btns.eval, S: cmpl = btns.compile}
+for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
   return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
@@ -69,4 +69,4 @@ setTimeout ->
 
 self.onfocus = -> code.focus()
 
-Coco.TREE = 'dc8945cb061da37d992b539ec9e218e6352bd9cf'
+Coco.COMMIT = '124e606659816e76f29385ef118bfffa094263c7'
