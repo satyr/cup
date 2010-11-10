@@ -1,5 +1,5 @@
-self.Coco = Coco
-self.print = (msg, tag) ->
+@Coco = Coco
+@print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
     ctrl.setAttribute 'data-x', -~ctrl.getAttribute 'data-x'
@@ -11,10 +11,10 @@ self.print = (msg, tag) ->
   silence
 print.last = silence = Date()
 
-self.clear = -> pout.innerHTML = ''
-self.say = self.puts = (xs...) -> print xs.join '\n'
-self.warn = (er) -> print "#{er}", 'em'
-self.p = -> say (JSON.stringify x, null, 1 for x of arguments).join '\n'
+@clear = -> pout.innerHTML = ''
+@say = self.puts = (xs...) -> print xs.join '\n'
+@warn = (er) -> print "#{er}", 'em'
+@p = -> say (JSON.stringify x, null, 1 for x of arguments).join '\n'
 
 $ = (id) -> document.getElementById id
 code = $ 'code'
@@ -67,6 +67,6 @@ setTimeout ->
     poem
   (if op then btns[op.toLowerCase()] else eva1).click()
 
-self.onfocus = -> code.focus()
+@onfocus = -> code.focus()
 
-Coco.COMMIT = '124e606659816e76f29385ef118bfffa094263c7'
+Coco.COMMIT = 'e6adf1e11480b70264b7e1096a51c20f69b2b78b'
