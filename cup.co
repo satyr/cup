@@ -35,7 +35,7 @@ kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = Coco[@id] value, bare: true
+  try r = Coco[@id] '\n' + value, bare: true
   catch e then warn e; throw e
   switch @accessKey
   case 't'
@@ -69,4 +69,4 @@ setTimeout ->
 
 @onfocus = -> code.focus()
 
-Coco.COMMIT = 'e6adf1e11480b70264b7e1096a51c20f69b2b78b'
+Coco.COMMIT = 'd949d467aaacf3f7165cbf1fda00dba350d94184'
