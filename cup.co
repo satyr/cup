@@ -1,4 +1,3 @@
-@Coco = Coco
 @print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
@@ -69,4 +68,4 @@ setTimeout ->
 
 @onfocus = -> code.focus()
 
-Coco.COMMIT = 'd949d467aaacf3f7165cbf1fda00dba350d94184'
+Coco.COMMIT = 'e665891c0f447aac83b0d1f41713a1a000b22781'
