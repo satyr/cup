@@ -54,7 +54,7 @@ for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
   return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
-  return unless b = (ev.ctrlKey && eva1) || (ev.shiftKey && cmpl)
+  return unless b =  ev.ctrlKey && eva1 ||  ev.shiftKey && cmpl
   b.click()
   false
 setTimeout ->
@@ -68,4 +68,4 @@ setTimeout ->
 
 @onfocus = -> code.focus()
 
-Coco.COMMIT = '22121d851c22c77a89b9bf570bc3d29ea5446132'
+Coco.COMMIT = '0c7154aa1edb377b80f24c2478049bcdf131dd74'
