@@ -21,7 +21,7 @@ ctrl = $ 'ctrl'
 pout = $ 'pout'
 btns = {}
 poem = '''
-"Coco v#{Coco.VERSION}
+"Coco #{Coco.VERSION}"
 
 
 
