@@ -68,4 +68,4 @@ setTimeout ->
 
 @onfocus = -> code.focus()
 
-Coco.COMMIT = 'f10291fd58b520f7e969f78455d325dc169829f5'
+Coco.COMMIT = 'b38e77bb6dbd79cf360e0d819b3ed9fb7c7346d1'
