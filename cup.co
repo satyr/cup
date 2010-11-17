@@ -37,10 +37,8 @@ kick = ->
   try r = Coco[@id] '\n' + value, bare: true
   catch e then warn e; throw e
   switch @accessKey
-  case 't'
-    r = (tag for [tag] of r).join(' ').replace /\n/g, '\\n'
-  case 'n'
-    r = r.expressions.join('').slice 1
+  case 't' then r = (tag for [tag] of r).join ' '
+  case 'n' then r.=expressions.join('').slice 1
   puts r
 
 for Key of <[ Tokens Nodes Compile Eval ]>
