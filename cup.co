@@ -21,7 +21,7 @@ ctrl = $ 'ctrl'
 pout = $ 'pout'
 btns = {}
 poem = '''
-"Coco v#{Coco.VERSION} #{Coco.COMMIT}"
+"Coco v#{Coco.VERSION}
 
 
 
@@ -65,5 +65,3 @@ setTimeout ->
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 @onfocus = -> code.focus()
-
-Coco.COMMIT = 'b38e77bb6dbd79cf360e0d819b3ed9fb7c7346d1'
