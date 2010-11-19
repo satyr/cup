@@ -65,3 +65,5 @@ setTimeout ->
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 @onfocus = -> code.focus()
+
+Coco.VERSION += 'pre'
