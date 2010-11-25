@@ -66,4 +66,4 @@ setTimeout ->
 
 @onfocus = -> code.focus()
 
-Coco.VERSION += 'pre'
+Coco.VERSION += '+'
