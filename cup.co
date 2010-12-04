@@ -38,7 +38,7 @@ kick = ->
   catch e then warn e; throw e
   switch @accessKey
   case 't' then r = (tag for [tag] of r).join ' '
-  case 'n' then r.=expressions.join('').slice 1
+  case 'n' then r.=lines.join('').slice 1
   puts r
 
 for Key of <[ Tokens Nodes Compile Eval ]>
@@ -65,5 +65,3 @@ setTimeout ->
   (if op then btns[op.toLowerCase()] else eva1).click()
 
 @onfocus = -> code.focus()
-
-Coco.VERSION += '+'
