@@ -11,7 +11,7 @@
 print.last = silence = Date()
 
 @clear = -> pout.innerHTML = ''
-@say = self.puts = (xs...) -> print xs.join '\n'
+@say = self.puts = (...xs) -> print xs.join '\n'
 @warn = (er) -> print "#{er}", 'em'
 @p = -> say (JSON.stringify x, null, 1 for x of arguments).join '\n'
 
