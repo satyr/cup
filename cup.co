@@ -1,24 +1,24 @@
 @print = (msg, tag) ->
   return if msg is silence
   if print.last is print.last = msg
-    ctrl.setAttribute 'data-x', -~ctrl.getAttribute 'data-x'
+    ctrl.setAttribute \data-x, -~ctrl.getAttribute \data-x
   else
-    ctrl.setAttribute 'data-x', 1
-    lmn = document.createElement tag || 'span'
-    lmn.appendChild document.createTextNode msg + '\n'
+    ctrl.setAttribute \data-x, 1
+    lmn = document.createElement tag || \span
+    lmn.appendChild document.createTextNode msg + \\n
     pout.insertBefore lmn, pout.firstChild
   silence
 print.last = silence = Date()
 
 @clear = -> pout.innerHTML = ''
-@say = self.puts = (...xs) -> print xs.join '\n'
-@warn = (er) -> print "#{er}", 'em'
-@p = -> say (JSON.stringify x, null, 1 for x of arguments).join '\n'
+@say = self.puts = (...xs) -> print xs.join \\n
+@warn = (er) -> print "#{er}", \em
+@p = -> say (JSON.stringify x, null, 1 for x of arguments).join \\n
 
 $ = (id) -> document.getElementById id
-code = $ 'code'
-ctrl = $ 'ctrl'
-pout = $ 'pout'
+code = $ \code
+ctrl = $ \ctrl
+pout = $ \pout
 btns = {}
 poem = '''
 "Coco #{Coco.VERSION}"
@@ -33,16 +33,16 @@ But to embrace the good parts
 kick = ->
   code.focus()
   {value} = code
-  location.hash = @id.charAt() + ':' + encodeURI value if value isnt poem
-  try r = Coco[@id] '\n' + value, bare: true
+  location.hash = @id.charAt() + \: + encodeURI value if value isnt poem
+  try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
-  case 't' then r = (tag for [tag] of r).join ' '
-  case 'n' then r.=lines.join('').slice 1
+  case \t then r = (tag for [tag] of r).join ' '
+  case \n then r.=lines.join('').slice 1
   puts r
 
 for Key of <[ Tokens Nodes Compile Eval ]>
-  btn = document.createElement 'button'
+  btn = document.createElement \button
   btn.id = key = Key.toLowerCase()
   btn.onclick = kick
   btn.innerHTML = Key
