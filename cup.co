@@ -33,13 +33,14 @@ But to embrace the good parts
 kick = ->
   code.focus()
   {value} = code
-  location.hash = @id.charAt() + \: + encodeURI value if value isnt poem
+  location.hash = @id.charAt() + \: + encode value if value isnt poem
   try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
   case \t then r = (tag for [tag] of r).join ' '
   case \n then r.=lines.join('').slice 1
   puts r
+encode = -> encodeURI(it).replace /[()]/g, -> escape it
 
 for Key of <[ Tokens Nodes Compile Eval ]>
   btn = document.createElement \button
