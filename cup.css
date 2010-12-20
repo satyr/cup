@@ -6,6 +6,7 @@
   margin-left: 1em;
 }
 
+#pout {white-space: pre-wrap}
 #pout > *:first-child {font-weight: bold}
 
 #ribbon {
