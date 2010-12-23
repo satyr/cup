@@ -10,12 +10,13 @@
   silence
 print.last = silence = Date()
 
-@clear = -> pout.innerHTML = ''
-@say = self.puts = (...xs) -> print xs.join \\n
-@warn = (er) -> print "#{er}", \em
-@p = -> say (JSON.stringify x, null, 1 for x of arguments).join \\n
+@say = @puts = -> print [...arguments].join \\n
 
-$ = (id) -> document.getElementById id
+@warn  = -> print "#{it}", \em
+@p     = -> say (JSON.stringify x, null, 1 for x of arguments).join \\n
+@clear = -> pout.innerHTML = ''
+
+$ = -> document.getElementById it
 code = $ \code
 ctrl = $ \ctrl
 pout = $ \pout
@@ -53,9 +54,9 @@ for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
   return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
-  return unless b = ev.ctrlKey && eva1 || ev.shiftKey && cmpl
-  b.click()
-  false
+  if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
+    that.click()
+    false
 setTimeout ->
   code.value = if cf = location.hash.slice 1
     try cf = decodeURIComponent cf
