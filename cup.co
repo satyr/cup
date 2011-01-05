@@ -34,7 +34,7 @@ But to embrace the good parts
 kick = ->
   code.focus()
   {value} = code
-  location.hash = @id.charAt() + \: + encode value if value isnt poem
+  location.hash = @id.charAt() + \: + encode value unless value is poem
   try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
@@ -53,7 +53,7 @@ for Key of <[ Tokens Nodes Compile Eval ]>
 for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
-  return if (ev ||= event).keyCode isnt 13 || ev.altKey || ev.metaKey
+  return if (ev ||= event).keyCode != 13 || ev.altKey || ev.metaKey
   if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
     that.click()
     false
