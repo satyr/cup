@@ -38,8 +38,15 @@ kick = ->
   try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
-  case \t then r = (tag for [tag] of r).join ' '
   case \n then r.=lines.join('').slice 1
+  case <[ t l ]>
+    lines = []
+    for [tag, val, lno] of r
+      tag += \: + val unless tag is val += ''
+      (lines[lno] ||= []).push tag
+    for l, i of lines
+      lines[i] = if l then l.join(' ').replace /\n/g \\\n else ''
+    r = lines.join \\n
   puts r
 encode = -> encodeURI(it).replace /[()]/g, -> escape it
 
