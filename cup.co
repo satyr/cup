@@ -43,7 +43,7 @@ kick = ->
   puts r
 encode = -> encodeURI(it).replace /[()]/g, -> escape it
 
-for Key of <[ Tokens Nodes Compile Eval ]>
+for Key of <[ Lex Tokens Nodes Compile Eval ]>
   btn = document.createElement \button
   btn.id = key = Key.toLowerCase()
   btn.onclick = kick
