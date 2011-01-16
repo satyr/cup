@@ -27,9 +27,9 @@ poem = '''
 
 
 
-###
-Not to abandon the evil parts
-But to embrace the good parts
+
+# Not to abandon the evil parts
+# But to embrace the good parts
 '''
 kick = ->
   code.focus()
