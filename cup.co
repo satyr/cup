@@ -3,18 +3,20 @@
   if print.last is print.last = msg
     ctrl.setAttribute \data-x, -~ctrl.getAttribute \data-x
   else
-    ctrl.setAttribute \data-x, 1
+    ctrl.setAttribute \data-x 1
     lmn = document.createElement tag || \span
     lmn.appendChild document.createTextNode msg + \\n
     pout.insertBefore lmn, pout.firstChild
   silence
 print.last = silence = Date()
 
-@say = @puts = -> print [...arguments].join \\n
+@say = @puts = -> print [...@@].join \\n
 
-@warn  = -> print "#{it}", \em
-@p     = -> say (JSON.stringify x, null, 1 for x of arguments).join \\n
+@warn  = -> print "#{it}" \em
+@p     = -> say (JSON.stringify x, null, 1 for x of @@).join \\n
 @clear = -> pout.innerHTML = ''
+
+Coco.eval = -> (0; eval) @compile ...
 
 $ = -> document.getElementById it
 code = $ \code
@@ -48,7 +50,7 @@ kick = ->
       lines[i] = if l then l.join(' ').replace /\n/g \\\n else ''
     r = lines.join \\n
   puts r
-encode = -> encodeURI(it).replace /[()]/g, -> escape it
+encode = -> encodeURI(it).replace /[()]/g -> escape it
 
 for Key of <[ Lex Tokens Nodes Compile Eval ]>
   btn = document.createElement \button
