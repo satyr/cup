@@ -16,7 +16,7 @@ print.last = silence = Date()
 @p     = -> say (JSON.stringify x, null, 1 for x of @@).join \\n
 @clear = -> pout.innerHTML = ''
 
-Coco.eval = -> (0; eval) @compile ...
+Coco.eval = -> Function(\return + @compile it, {+repl}).call self
 
 $ = -> document.getElementById it
 code = $ \code
