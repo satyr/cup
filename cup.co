@@ -10,13 +10,13 @@
   silence
 print.last = silence = Date()
 
-@say = @puts = -> print [...@@].join \\n
+@say = @puts = -> print [...@@]join \\n
 
 @warn  = -> print "#{it}" \em
-@p     = -> say (JSON.stringify x, null, 1 for x of @@).join \\n
+@p     = -> say (JSON.stringify x, null, 1 for x of @@)join \\n
 @clear = -> pout.innerHTML = ''
 
-Coco.eval = -> Function(\return + @compile it, {+repl}).call self
+Coco.eval = -> Function(\return + @compile it, {+repl})call self
 
 $ = -> document.getElementById it
 code = $ \code
@@ -40,17 +40,17 @@ kick = ->
   try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
-  case \n then r.=lines.join('').slice 1
+  case \n then r.=lines.join('')slice 1
   case <[ t l ]>
     lines = []
     for [tag, val, lno] of r
       tag += \: + val unless tag is val += ''
-      (lines[lno] ||= []).push tag
+      (lines[lno] ||= [])push tag
     for l, i of lines
-      lines[i] = if l then l.join(' ').replace /\n/g \\\n else ''
+      lines[i] = if l then l.join(' ')replace /\n/g \\\n else ''
     r = lines.join \\n
   puts r
-encode = -> encodeURI(it).replace /[()]/g -> escape it
+encode = -> encodeURI(it)replace /[()]/g -> escape it
 
 for Key of <[ Lex Tokens Nodes Compile Eval ]>
   btn = document.createElement \button
@@ -62,17 +62,17 @@ for Key of <[ Lex Tokens Nodes Compile Eval ]>
 for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
 document.onkeydown = (ev) ->
-  return if (ev ||= event).keyCode != 13 || ev.altKey || ev.metaKey
+  return if (ev ||= event)keyCode != 13 || ev.altKey || ev.metaKey
   if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
     that.click()
     false
 setTimeout ->
   code.value = if cf = location.hash.slice 1
     try cf = decodeURIComponent cf
-    {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/.test cf
+    {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/test cf
     cf
   else
     poem
-  (if op then btns[op.toLowerCase()] else eva1).click()
+  (if op then btns[op.toLowerCase()] else eva1)click()
 
 @onfocus = -> code.focus()

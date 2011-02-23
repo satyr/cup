@@ -7,7 +7,7 @@
 }
 
 #pout {white-space: pre-wrap}
-#pout > *:first-child {font-weight: bold}
+#pout > :first-child {font-weight: bold}
 
 #ribbon {
   position: fixed; bottom: 0; right: 0; border: 0;
