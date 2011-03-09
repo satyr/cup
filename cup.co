@@ -1,5 +1,5 @@
 @print = (msg, tag) ->
-  return if msg is silence
+  return if msg is void
   if print.last is print.last = msg
     ctrl.setAttribute \data-x, -~ctrl.getAttribute \data-x
   else
@@ -7,38 +7,32 @@
     lmn = document.createElement tag || \span
     lmn.appendChild document.createTextNode msg + \\n
     pout.insertBefore lmn, pout.firstChild
-  silence
-print.last = silence = Date()
-
-@say = @puts = -> print []join.call @@, \\n
-
+  void
+@say   = -> print []join.call @@, ''
+@puts  = -> print []join.call @@, \\n
 @warn  = -> print "#{it}" \em
-@p     = -> say (JSON.stringify x, null, 1 for x of @@)join \\n
+@p     = -> print (JSON.stringify x, null, 1 for x of @@)join \\n
 @clear = -> pout.innerHTML = ''
 
 Coco.eval = -> Function(\return + @compile it, {+repl})call self
 
-$ = -> document.getElementById it
+$ = document~.getElementById
 code = $ \code
 ctrl = $ \ctrl
 pout = $ \pout
 btns = {}
 poem = '''
-"Coco #{Coco.VERSION}"
-
-
-
-
-
-# Not to abandon the evil parts
-# But to embrace the good parts
+  "Coco #{Coco.VERSION}"
+  \n\n\n\n
+  # Not to abandon the evil parts
+  # But to embrace the good parts
 '''
 kick = ->
   code.focus()
   {value} = code
   location.hash = @id.charAt() + \: + encode value unless value is poem
   try r = Coco[@id] value, {+bare}
-  catch e then warn e; throw e
+  catch return warn e
   switch @accessKey
   case \a then r.=lines.join('')slice 1
   case <[ t l ]>
@@ -49,7 +43,7 @@ kick = ->
     for l, i of lines
       lines[i] = if l then l.join(' ')replace /\n/g \\\n else ''
     r = lines.join \\n
-  puts r
+  print r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
 
 for Key of <[ Lex Tokens AST Compile Eval ]>
@@ -59,22 +53,21 @@ for Key of <[ Lex Tokens AST Compile Eval ]>
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
-btns.n = btns.a
+{e: eva1, c: cmpl, a: btns.n} = btns
 
-for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
-  b.innerHTML += " <small><kbd>\\#{k}-RET"
+b.innerHTML += " <small><kbd>\\#{k}-RET" for k, b in C: eva1, S: cmpl
 document.onkeydown = (ev || event) ->
   return if ev.keyCode != 13 || ev.altKey || ev.metaKey
   if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
     that.click()
     false
-setTimeout ->
-  code.value = if cf = location.hash.slice 1
-    try cf = decodeURIComponent cf
-    {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/test cf
-    cf
-  else
-    poem
-  (if op then btns[op.toLowerCase()] else eva1)click()
 
 @onfocus = -> code.focus()
+
+code.value = if cf = location.hash.slice 1
+  try cf = decodeURIComponent cf
+  {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/test cf
+  cf
+else
+  poem
+(if op then btns[op.toLowerCase()] else eva1)click()
