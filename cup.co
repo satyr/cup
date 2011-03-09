@@ -10,7 +10,7 @@
   silence
 print.last = silence = Date()
 
-@say = @puts = -> print [...@@]join \\n
+@say = @puts = -> print []join.call @@, \\n
 
 @warn  = -> print "#{it}" \em
 @p     = -> say (JSON.stringify x, null, 1 for x of @@)join \\n
@@ -40,7 +40,7 @@ kick = ->
   try r = Coco[@id] value, {+bare}
   catch e then warn e; throw e
   switch @accessKey
-  case \n then r.=lines.join('')slice 1
+  case \a then r.=lines.join('')slice 1
   case <[ t l ]>
     lines = []
     for [tag, val, lno] of r
@@ -52,17 +52,19 @@ kick = ->
   puts r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
 
-for Key of <[ Lex Tokens Nodes Compile Eval ]>
+for Key of <[ Lex Tokens AST Compile Eval ]>
   btn = document.createElement \button
   btn.id = key = Key.toLowerCase()
   btn.onclick = kick
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
+btns.n = btns.a
+
 for k, b in {C: eva1 = btns.eval, S: cmpl = btns.compile}
   b.innerHTML += " <small><kbd>\\#{k}-RET"
-document.onkeydown = (ev) ->
-  return if (ev ||= event)keyCode != 13 || ev.altKey || ev.metaKey
+document.onkeydown = (ev || event) ->
+  return if ev.keyCode != 13 || ev.altKey || ev.metaKey
   if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
     that.click()
     false
