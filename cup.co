@@ -35,6 +35,7 @@ kick = ->
   catch return warn e
   switch @accessKey
   case \a then r.=lines.join('')slice 1
+  case \e then self._ = r
   case <[ t l ]>
     lines = []
     for [tag, val, lno] of r
