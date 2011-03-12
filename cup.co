@@ -16,7 +16,7 @@
 
 Coco.eval = -> Function(\return + @compile it, {+repl})call self
 
-$ = document~.getElementById
+$ = document~getElementById
 code = $ \code
 ctrl = $ \ctrl
 pout = $ \pout
