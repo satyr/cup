@@ -39,10 +39,9 @@ kick = ->
   case <[ t l ]>
     lines = []
     for [tag, val, lno] of r
-      tag += \: + val unless tag is val += ''
-      (lines[lno] ||= [])push tag
+      lines@[lno]push if tag.toLowerCase() is val then tag else "#{tag}:#{val}"
     for l, i of lines
-      lines[i] = if l then l.join(' ')replace /\n/g \\\n else ''
+      lines[i] = l?.join(' ')replace /\n/g \\\n or ''
     r = lines.join \\n
   print r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
