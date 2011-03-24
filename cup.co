@@ -11,7 +11,8 @@
 @say   = -> print []join.call @@, ''
 @puts  = -> print []join.call @@, \\n
 @warn  = -> print "#{it}" \em
-@p     = -> print (JSON.stringify x, null, 1 for x of @@)join \\n
+@p     = -> print (pp x for x of @@)join \\n
+@pp    = uneval ? -> JSON.stringify it, null 1
 @clear = -> pout.innerHTML = ''
 
 Coco.eval = -> Function(\return + @compile it, {+repl})call self
@@ -41,7 +42,7 @@ kick = ->
     for [tag, val, lno] of r
       lines@[lno]push if tag.toLowerCase() is val then tag else "#{tag}:#{val}"
     for l, i of lines
-      lines[i] = l?.join(' ')replace /\n/g \\\n or ''
+      lines[i] = l?join(' ')replace /\n/g \\\n or ''
     r = lines.join \\n
   print r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
