@@ -8,10 +8,10 @@
     lmn.appendChild document.createTextNode msg + \\n
     pout.insertBefore lmn, pout.firstChild
   void
-@say   = -> print []join.call @@, ''
-@puts  = -> print []join.call @@, \\n
+@say   = -> print @@ * ''
+@puts  = -> print @@ * \\n
 @warn  = -> print "#{it}" \em
-@p     = -> print (pp x for x of @@)join \\n
+@p     = -> print (pp x for x of @@) * \\n
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = -> pout.innerHTML = ''
 
