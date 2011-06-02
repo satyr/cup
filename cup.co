@@ -15,7 +15,7 @@
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = -> pout.innerHTML = ''
 
-Coco.eval = -> Function(\return + @compile it, {+repl})call self
+Coco.eval = -> do Function \return + @compile it, {+repl}
 
 $ = document~getElementById
 code = $ \code
@@ -35,15 +35,15 @@ kick = ->
   try r = Coco[@id] value, {+bare}
   catch return warn e
   switch @accessKey
-  case \a then r.=lines.join('')slice 1
-  case \e then self._ = r
-  case <[ t l ]>
+  case \t \l
     lines = []
     for [tag, val, lno] of r
       lines@[lno]push if tag.toLowerCase() is val then tag else "#{tag}:#{val}"
     for l, i of lines
       lines[i] = l?join(' ')replace /\n/g \\\n or ''
     r = lines.join \\n
+  case \a then r.=lines.join('')slice 1
+  case \e then self._ = r
   print r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
 
@@ -54,12 +54,12 @@ for Key of <[ Lex Tokens AST Compile Eval ]>
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
-{e: eva1, c: cmpl, a: btns.n} = btns
+btns.n = btns.a
 
-b.innerHTML += " <small><kbd>\\#{k}-RET" for k, b in C: eva1, S: cmpl
+b.innerHTML += " <small><kbd>\\#{k}-RET" for k, b in C: btns.e, S: btns.c
 document.onkeydown = (ev || event) ->
-  return if ev.keyCode != 13 || ev.altKey || ev.metaKey
-  if ev.ctrlKey && eva1 || ev.shiftKey && cmpl
+  return if ev.keyCode != 13_RET || ev.altKey || ev.metaKey
+  if ev.ctrlKey && btns.e || ev.shiftKey && btns.c
     that.click()
     false
 
@@ -67,8 +67,8 @@ document.onkeydown = (ev || event) ->
 
 code.value = if cf = location.hash.slice 1
   try cf = decodeURIComponent cf
-  {$1: op, rightContext: cf} = RegExp if /^([a-v]+):/test cf
+  {$1: op, rightContext: cf} = RegExp if /^([ltance]+):/itest cf
   cf
 else
   poem
-(if op then btns[op.toLowerCase()] else eva1)click()
+btns[op?toLowerCase() or \e]click()
