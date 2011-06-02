@@ -65,10 +65,11 @@ document.onkeydown = (ev || event) ->
 
 @onfocus = -> code.focus()
 
-code.value = if cf = location.hash.slice 1
-  try cf = decodeURIComponent cf
-  {$1: op, rightContext: cf} = RegExp if /^([ltance]+):/itest cf
-  cf
-else
-  poem
-btns[op?toLowerCase() or \e]click()
+do @onhashchange = ->
+  code.value = if cf = location.hash.slice 1
+    try cf = decodeURIComponent cf
+    {$1: op, rightContext: cf} = RegExp if /^([ltance]+):/itest cf
+    cf
+  else
+    poem
+  btns[op?toLowerCase() or \e]click()
