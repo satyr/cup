@@ -54,8 +54,6 @@ for Key of <[ Lex Tokens AST Compile Eval ]>
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
 
-btns.n = btns.a
-
 b.innerHTML += " <small><kbd>\\#{k}-RET" for k, b in C: btns.e, S: btns.c
 document.onkeydown = (ev || event) ->
   return if ev.keyCode != 13_RET || ev.altKey || ev.metaKey
@@ -68,7 +66,7 @@ document.onkeydown = (ev || event) ->
 do @onhashchange = ->
   code.value = if cf = location.hash.slice 1
     try cf = decodeURIComponent cf
-    {$1: op, rightContext: cf} = RegExp if /^([ltance]+):/itest cf
+    {$1: op, rightContext: cf} = RegExp if /^([ltace]+):/itest cf
     cf
   else
     poem
