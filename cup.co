@@ -10,7 +10,7 @@
   void
 @say   = -> print @@ * ''
 @puts  = -> print @@ * \\n
-@warn  = -> print "#{it}" \em
+@warn  = -> print "#it" \em
 @p     = -> print (pp x for x of @@) * \\n
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = -> pout.innerHTML = ''
@@ -29,16 +29,16 @@ poem = '''
   # But to embrace the good parts
 '''
 kick = ->
-  code.focus()
+  code.focus!
   {value} = code
-  location.hash = @id.charAt() + \: + encode value unless value is poem
+  location.hash = @id.charAt! + \: + encode value unless value is poem
   try r = Coco[@id] value, {+bare}
   catch return warn e
   switch @accessKey
   case \t \l
     lines = []
     for [tag, val, lno] of r
-      lines@[lno]push if tag.toLowerCase() is val then tag else "#{tag}:#{val}"
+      lines@@[lno]push if tag.toLowerCase! is val then tag else "#{tag}:#{val}"
     for l, i of lines
       lines[i] = l?join(' ')replace /\n/g \\\n or ''
     r = lines.join \\n
@@ -49,25 +49,25 @@ encode = -> encodeURI(it)replace /[()]/g -> escape it
 
 for Key of <[ Lex Tokens AST Compile Eval ]>
   btn = document.createElement \button
-  btn.id = key = Key.toLowerCase()
+  btn.id = key = Key.toLowerCase!
   btn.onclick = kick
   btn.innerHTML = Key
-  btns[key] = btns[btn.accessKey = key.charAt 0] = ctrl.appendChild btn
+  btns[key] = btns[btn.accessKey = key.charAt!] = ctrl.appendChild btn
 
-b.innerHTML += " <small><kbd>\\#{k}-RET" for k, b in C: btns.e, S: btns.c
+b.innerHTML += " <small><kbd>\\#k-RET" for k, b in C: btns.e, S: btns.c
 document.onkeydown = (ev || event) ->
   return if ev.keyCode != 13_RET || ev.altKey || ev.metaKey
   if ev.ctrlKey && btns.e || ev.shiftKey && btns.c
-    that.click()
+    that.click!
     false
 
-@onfocus = -> code.focus()
+@onfocus = -> code.focus!
 
 do @onhashchange = (ev) ->
   code.value = if hash = location.hash.slice 1
     try hash = decodeURIComponent hash
-    [[] op, hash] = that if /^([ltace]+):([\s\S]*)/iexec hash
+    [, op, hash]? = /^([ltace]+):([\s\S]*)/iexec hash
     hash
   else
     poem
-  ev or btns[op?toLowerCase() or \e]click()
+  ev or btns[op?toLowerCase! or \e]click!
