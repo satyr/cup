@@ -47,14 +47,14 @@ kick = ->
   print r
 encode = -> encodeURI(it)replace /[()]/g -> escape it
 
-for Key of <[ Lex Tokens AST Compile Eval ]>
+for Key of <[ Compile Eval Lex Tokens AST ]>
   btn = document.createElement \button
   btn.id = key = Key.toLowerCase!
   btn.onclick = kick
   btn.innerHTML = Key
   btns[key] = btns[btn.accessKey = key.charAt!] = ctrl.appendChild btn
 
-b.innerHTML += " <small><kbd>\\#k-RET" for k, b in C: btns.e, S: btns.c
+b.innerHTML += " <small>(<kbd>\\#k-RET</kbd>)</small>" for k, b in C: btns.e, S: btns.c
 document.onkeydown = (ev || event) ->
   return if ev.keyCode != 13_RET || ev.altKey || ev.metaKey
   if ev.ctrlKey && btns.e || ev.shiftKey && btns.c
