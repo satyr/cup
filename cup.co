@@ -1,4 +1,4 @@
-@print = (msg, tag) ->
+@print = !(msg, tag) ->
   return if msg is void
   if print.last is print.last = msg
     ctrl.setAttribute \data-x, -~ctrl.getAttribute \data-x
@@ -7,13 +7,12 @@
     lmn = document.createElement tag || \span
     lmn.appendChild document.createTextNode msg + \\n
     pout.insertBefore lmn, pout.firstChild
-  void
-@say   = -> print @@ * ''
-@puts  = -> print @@ * \\n
-@warn  = -> print "#it" \em
-@p     = -> print (pp x for x of @@) * \\n
+@say   = !-> print @@ * ''
+@puts  = !-> print @@ * \\n
+@warn  = !-> print "#it" \em
+@p     = !-> print (pp x for x of @@) * \\n
 @pp    = uneval ? -> JSON.stringify it, null 1
-@clear = -> pout.innerHTML = ''
+@clear = !-> pout.innerHTML = ''
 
 Coco.eval = -> do Function \return + @compile it, {+repl}
 
@@ -28,7 +27,7 @@ poem = '''
   # Not to abandon the evil parts
   # But to embrace the good parts
 '''
-kick = ->
+kick = !->
   code.focus!
   {value} = code
   location.hash = @id.charAt! + \: + encode value unless value is poem
@@ -61,9 +60,9 @@ document.onkeydown = (ev || event) ->
     that.click!
     false
 
-@onfocus = -> code.focus!
+@onfocus = !-> code.focus!
 
-do @onhashchange = (ev) ->
+do @onhashchange = !(ev) ->
   code.value = if hash = location.hash.slice 1
     try hash = decodeURIComponent hash
     [, op, hash]? = /^([ltace]+):([\s\S]*)/iexec hash
