@@ -55,8 +55,8 @@ for Key of <[ Lex Tokens AST Compile Eval ]>
 
 b.innerHTML += " <small><kbd>\\#k-RET" for k, b in C: btns.e, S: btns.c
 document.onkeydown = (ev || event) ->
-  return if ev.keyCode != 13_RET || ev.altKey || ev.metaKey
-  if ev.ctrlKey && btns.e || ev.shiftKey && btns.c
+  return if ev.keyCode != 13_RET || ev.altKey
+  if (ev.ctrlKey || ev.metaKey) && btns.e || ev.shiftKey && btns.c
     that.click!
     false
 
