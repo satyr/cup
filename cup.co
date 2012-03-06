@@ -14,7 +14,7 @@
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = !-> pout.innerHTML = ''
 
-Coco.eval = -> do Function \return + @compile it, {+repl}
+Coco.eval = -> do Function \return + @compile it, {\eval}
 
 $ = document~getElementById
 code = $ \code
