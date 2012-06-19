@@ -14,7 +14,7 @@
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = !-> pout.innerHTML = ''
 
-Coco.eval = -> do Function \return + @compile it, {\eval}
+Coco.eval = -> do Function \return + @compile it, {+eval}
 
 $ = document~getElementById
 code = $ \code
@@ -22,7 +22,7 @@ ctrl = $ \ctrl
 pout = $ \pout
 btns = {}
 poem = '''
-  "Coco #{Coco.VERSION}"
+  Coco.VERSION
   \n\n\n\n
   # Not to abandon the evil parts
   # But to embrace the good parts
@@ -37,7 +37,7 @@ kick = !->
   case \t \l
     lines = []
     for [tag, val, lno] of r
-      lines@@[lno]push if tag.toLowerCase! is val then tag else "#{tag}:#{val}"
+      lines@@[lno]push if tag.toLowerCase! is val then tag else "#tag:#val"
     for l, i of lines
       lines[i] = l?join(' ')replace /\n/g \\\n or ''
     r = lines.join \\n
