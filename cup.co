@@ -44,7 +44,10 @@ kick = !->
   case \a then r.=lines.join('')slice 1
   case \e then self._ = r
   print r
-encode = -> encodeURI(it)replace /[()]/g -> escape it
+encode = ->
+  encodeURI it.replace /%/g \\0 .replace /[()]/g -> escape it
+decode = ->
+  decodeURIComponent it .replace /\0/g \%
 
 for Key of <[ Lex Tokens AST Compile Eval ]>
   btn = document.createElement \button
@@ -64,7 +67,7 @@ document.onkeydown = (ev || event) ->
 
 do @onhashchange = !(ev) ->
   code.value = if hash = location.hash.slice 1
-    try hash = decodeURIComponent hash
+    try hash = decode hash
     [, op, hash]? = /^([ltace]+):([\s\S]*)/iexec hash
     hash
   else
