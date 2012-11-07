@@ -1,13 +1,9 @@
-#ctrl[data-x='1']::after {display: none}
-#ctrl::after {
-  content: 'x' attr(data-x);
-  font: bold 88% monospace;
-  vertical-align: bottom;
-  margin-left: 1em;
-}
-
 #pout {white-space: pre-wrap}
 #pout > :first-child {font-weight: bold}
+#pout > [data-x]::after {
+  content: ' x' attr(data-x);
+  font: bold 80% monospace;
+}
 
 #ribbon {
   position: fixed; bottom: 0; right: 0; border: 0;

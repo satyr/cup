@@ -1,15 +1,18 @@
 @print = !(msg, tag) ->
   return if msg is void
+  msg += ''
   if print.last is print.last = msg
-    ctrl.setAttribute \data-x, -~ctrl.getAttribute \data-x
-  else
-    ctrl.setAttribute \data-x 1
-    lmn = document.createElement tag || \span
-    lmn.appendChild document.createTextNode msg + \\n
-    pout.insertBefore lmn, pout.firstChild
+    if lmn = pout.firstChild
+      lmn.setAttribute \data-x, -~(lmn.getAttribute \data-x or 1)
+    return
+  lmn = document.createElement tag || \span
+  lmn.appendChild document.createTextNode msg
+  pout.insertBefore lmn, pout.insertBefore do
+    document.createElement \br
+    pout.firstChild
 @say   = !-> print @@ * ''
 @puts  = !-> print @@ * \\n
-@warn  = !-> print "#it" \em
+@warn  = !-> print it, \em
 @p     = !-> print (pp x for x of @@) * \\n
 @pp    = uneval ? -> JSON.stringify it, null 1
 @clear = !-> pout.innerHTML = ''
