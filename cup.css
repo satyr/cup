@@ -3,6 +3,7 @@
 #pout > [data-x]::after {
   content: ' x' attr(data-x);
   font: bold 80% monospace;
+  opacity: 0.6;
 }
 
 #ribbon {
