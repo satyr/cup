@@ -74,5 +74,5 @@ do @onhashchange = !(ev) ->
     [, op, hash]? = /^([ltace]+):([\s\S]*)/iexec hash
     hash
   else
-    poem
+    code.value or poem
   ev or btns[op?toLowerCase! or \e]click!
